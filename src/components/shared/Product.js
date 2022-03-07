@@ -1,13 +1,11 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-
 // Functions
 import { shorten, existInCart, quantityCount } from '../../helpers/functions';
 // Context
 import { CartContext } from '../../context/CartContextProvider';
 // Icons
 import trashIcon from '../../assets/icons/trash.svg';
-
 const Product = ({ productData }) => {
       //Context states
       const { state, dispatch } = useContext(CartContext);
