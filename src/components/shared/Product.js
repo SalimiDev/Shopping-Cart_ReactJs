@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+// Style
+import styles from './Product.module.css';
 // Functions
 import { shorten, existInCart, quantityCount } from '../../helpers/functions';
 // Context
@@ -11,25 +13,25 @@ const Product = ({ productData }) => {
       const { state, dispatch } = useContext(CartContext);
       const { id, image, title, price } = productData;
       return (
-            <div>
-                  <img src={image} alt='product' style={{ width: '200px' }} />
+            <div className={styles.container}>
+                  <img className={styles.cardImage} src={image} alt='product' style={{ width: '200px' }} />
                   <h3>{shorten(title)}</h3>
                   <p>{price}</p>
-                  <div>
+                  <div className={styles.linkContainer}>
                         <Link to={`/products/${id}`}>Details</Link>
-                        <div>
+                        <div className={styles.buttonContainer}>
                               {quantityCount(state, id) > 1 && (
-                                    <button onClick={() => dispatch({ type: 'DECREASE', payload: productData })}>-</button>
+                                    <button  className={styles.smallButton} onClick={() => dispatch({ type: 'DECREASE', payload: productData })}> - </button>
                               )}
                               {quantityCount(state, id) === 1 && (
-                                    <button onClick={() => dispatch({ type: 'REMOVE_ITEM', payload: productData })}>
+                                    <button className={styles.smallButton} onClick={() => dispatch({ type: 'REMOVE_ITEM', payload: productData })}>
                                           <img src={trashIcon} alt='trash' style={{ width: '20px' }} />
                                     </button>
                               )}
-                              {existInCart(state, id) ? (
-                                    <button onClick={() => dispatch({ type: 'INCREASE', payload: productData })}>+</button>
+                              {quantityCount(state, productData.id) > 0 && ( <span className={styles.counter}>{quantityCount(state, productData.id)}</span> )}
+                              {existInCart(state, id) ? (<button className={styles.smallButton}onClick={() => dispatch({ type: 'INCREASE', payload: productData })}>+ </button>
                               ) : (
-                                    <button onClick={() => dispatch({ type: 'ADD_ITEM', payload: productData })}>Add to Cart</button>
+                              <button onClick={() => dispatch({ type: 'ADD_ITEM', payload: productData })}>Add to Cart</button>
                               )}
                         </div>
                   </div>
