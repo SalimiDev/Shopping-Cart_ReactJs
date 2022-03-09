@@ -34,7 +34,7 @@ const ShopCart = () => {
             }
 
             {
-                state.checkout &&<div className={styles.complete}>
+                state.checkout &&state.itemsCounter === 0 &&<div className={styles.complete}>
                         <h3>Checked out successfully</h3>
                         <Link to="/products">Buy More</Link>
                     </div>

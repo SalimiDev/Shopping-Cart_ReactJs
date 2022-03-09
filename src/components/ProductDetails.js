@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
-import { useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { Link,useParams } from 'react-router-dom';
 // Style
 import styles from "./ProductDetails.module.css";
 //Context
@@ -11,7 +10,7 @@ const ProductDetails = () => {
       const { id } = useParams();
       const product = products[id-1];
     //   Destructure object
-    const {title,image,description,price,category}=product || {};
+    const {title,image,description,price,category}=product || [];
 
       return (
             <div className={styles.container}>
